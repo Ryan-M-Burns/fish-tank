@@ -5,6 +5,13 @@ class Fishtank {
     this.denizens = {};
     this.specieses = {};
     this.drawing = true;
+
+    $(`#${divName}`).append(`<img id='tankImage' src="/images/fishTank.png"/>`);
+    $("#tankImage").css({
+      "width": "100%",
+      "height": "100%"
+    });
+
     this.drawGraphicsBound = this.drawGraphics.bind(this);    // ahahaha, welcome to `this` hell.  callback hell never had it so fiery.
     requestAnimationFrame(this.drawGraphicsBound);
   }
@@ -78,6 +85,7 @@ class Fishtank {
   drawGraphics() {
     this.runPhysics();  // TODO: maybe this should be on a separate setInterval
     var $fishtank = $('#' + this.divName);
+
     var centerX = Math.floor(window.innerWidth / 2);
     var floorY  = Math.floor(window.innerHeight * 0.95);
     for (var id in this.denizens) {
@@ -118,5 +126,16 @@ class Fishtank {
     };
   }
 
-}
+  renderRules() {
+    return {
+      imageUri: this.imageUri,
+      css: {
+        width: this.width,
+        height: this.height,
+      },
+      x: this.position.x - Math.floor(this.width/2),
+      y: this.position.y - Math.floor(this.height/2),
+    };
+  }
+};
 

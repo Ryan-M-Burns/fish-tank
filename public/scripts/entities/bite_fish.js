@@ -1,11 +1,14 @@
-class GoFish extends Fish {
+class BiteFish extends Fish {
 
   constructor(options) {
     super(options);
+    this.imageUri = '/images/greenFishR.png';
+    this.isTasty = false;
+    this.height =  40;
+    this.width =  40;
     this.surgeSecondsLeft = 0;
     this.maxSurge = 1.0;
     this.surgMult = 3.0;
-    this.imageUri = '/images/blueFish2.png';
   }
 
   updateOneTick() {
@@ -18,23 +21,7 @@ class GoFish extends Fish {
     this.surgeSecondsLeft = Math.max(0, this.surgeSecondsLeft - PHYSICS_TICK_SIZE_S);
   }
 
-
   onClick(event) {
     this.surgeSecondsLeft = this.maxSurge;
-    if (Math.random() * 100 < 50) {
-      this.imageUri = '/images/fireball.png';
-      this.width += 30;
-      this.height += 30;
-      setTimeout(() => {
-        this.height -= 10;
-        this.width -= 10;
-        this.imageUri = '/images/fishSkeleton.png';
-      },
-        2000);
-      setTimeout(() => {
-        this.kill();
-      },
-        4000);
-    }
   }
 }
